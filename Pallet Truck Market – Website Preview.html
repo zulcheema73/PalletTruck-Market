@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pallet Truck Market</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F3EC;--ink:#111111;--green:#1F3D2B;--onG:#F6F3EC;--sage:#DCE5DC;--line:#D8D3C8;--muted:#5F5B52;--b0:#E6E0D2;--b1:#DCE5DC;--b2:#EDE6D8;--b3:#D5DED6;--t0:#1F3D2B;--t1:#111111;--t2:#9A3E1B;--t3:#4F6B4A;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101A14;--ink:#F1EEE6;--green:#17301F;--onG:#F1EEE6;--sage:#BFD3C4;--line:#2C3D32;--muted:#A9B5AC;--b0:#1D2A21;--b1:#1A2B22;--b2:#2A2419;--b3:#1E2C25;--t0:#8FD1A5;--t1:#E8E4DA;--t2:#E59A72;--t3:#9CC59A}}
+:root[data-theme="dark"]{--bg:#101A14;--ink:#F1EEE6;--green:#17301F;--onG:#F1EEE6;--sage:#BFD3C4;--line:#2C3D32;--muted:#A9B5AC;--b0:#1D2A21;--b1:#1A2B22;--b2:#2A2419;--b3:#1E2C25;--t0:#8FD1A5;--t1:#E8E4DA;--t2:#E59A72;--t3:#9CC59A}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+a{color:inherit}h1,h2,h3,p{margin:0}button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:3px solid var(--t2);outline-offset:3px}
+.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500}
+.up{text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:600}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.ann{background:var(--green);color:var(--onG);text-align:center;padding:9px 16px}
+header{border-bottom:1px solid var(--line)}
+header .in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:16px 32px;max-width:1240px;margin:0 auto}
+header nav{display:flex;gap:24px}header nav.r{justify-content:flex-end}header a{text-decoration:none}
+.logo{font-size:26px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;text-align:center}
+.b{display:inline-flex;align-items:center;min-height:46px;padding:0 24px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);text-decoration:none;text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:600}
+.b:hover{background:var(--green);border-color:var(--green);color:var(--onG)}
+.b.o{background:transparent;color:var(--ink)}
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:420px;border-bottom:1px solid var(--line)}
+.hl{display:flex;flex-direction:column;justify-content:center;gap:20px;padding:48px 40px 48px max(32px,calc((100vw - 1240px)/2 + 32px))}
+.hl h1{font-size:clamp(44px,6.5vw,84px);line-height:.98}
+.hl p{max-width:440px;color:var(--muted);font-size:18px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.hr{background:var(--green);display:flex;align-items:center;justify-content:center;padding:32px;color:var(--sage)}
+.hr svg{width:100%;max-width:480px}
+section{padding:56px 0 0}
+.sh{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:20px}
+.sh h2{font-size:clamp(34px,4vw,52px);line-height:1.05}
+.tabs{display:flex;flex-wrap:wrap;gap:8px 28px}
+.tabs button{background:none;border:0;padding:0 0 4px;font-size:28px;color:var(--muted);border-bottom:2px solid transparent}
+.tabs button[aria-pressed=true]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);margin:12px 0 16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.chips button{min-height:40px;padding:0 16px;background:transparent;border:1px solid var(--line);border-radius:999px;font-size:14px}
+.chips button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px 20px}
+.im{position:relative;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;padding:12%;overflow:hidden;margin-bottom:10px}
+.im svg{width:100%}.im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.c0{background:var(--b0);color:var(--t0)}.c1{background:var(--b1);color:var(--t1)}.c2{background:var(--b2);color:var(--t2)}.c3{background:var(--b3);color:var(--t3)}
+.bd{position:absolute;top:10px;left:10px;background:var(--bg);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px}
+.tg{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tg.f{color:var(--t2)}
+.pc h3{font-size:15px;font-weight:600}
+.sp{color:var(--muted);font-size:14px}
+.pr{font-weight:600}.pr small{font-weight:400;color:var(--muted)}
+.en{display:inline-block;margin-top:6px;font-size:14px;font-weight:600;text-underline-offset:4px}
+.none{grid-column:1/-1;color:var(--muted)}
+.sell{background:var(--green);color:var(--onG);text-align:center;padding:72px 24px;margin-top:72px}
+.sell h2{font-size:clamp(34px,5vw,60px);line-height:1.05;margin-bottom:10px}
+.sell p{color:var(--sage);margin-bottom:24px}
+.sell .b{background:#F6F3EC;color:#111111;border-color:#F6F3EC}
+footer{padding:32px 0;color:var(--muted);font-size:14px}
+dialog{max-width:560px;width:calc(100% - 24px);max-height:92vh;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:22px}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+dialog h2{font-size:34px;margin-bottom:4px}
+dialog label{display:block;font-size:14px;font-weight:600;margin-top:12px}
+dialog input,dialog select,dialog textarea{width:100%;border:1px solid var(--line);background:var(--bg);padding:10px}
+.hint{font-size:13px;color:var(--muted)}
+#th{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}#th img{width:64px;height:64px;object-fit:cover}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+[hidden]{display:none!important}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}.hl{padding:40px 24px}.hr{min-height:240px}}
+@media (max-width:700px){header .in{grid-template-columns:1fr;text-align:center;padding:12px 16px}header nav,header nav.r{justify-content:center}.logo{order:-1;font-size:22px}.wrap{padding:0 20px}.tabs button{font-size:24px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="pt" viewBox="0 0 220 130"><path d="M46 12L38 78" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M30 12H62" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/><path d="M24 78H64L74 62H84V96H24Z" fill="currentColor"/><rect x="24" y="96" width="176" height="9" rx="4" fill="currentColor"/><circle cx="44" cy="114" r="11" fill="currentColor"/><circle cx="186" cy="112" r="8" fill="currentColor"/></symbol></svg>
+<div class="ann up">New · Used · Mechanically repaired · Faulty · Hire</div>
+<header><div class="in">
+<nav class="up"><a href="#shop" data-t="all">Shop</a><a href="#shop" data-t="hire">Hire</a></nav>
+<a class="logo serif" href="#top">Pallet Truck Market</a>
+<nav class="r"><button class="b" type="button" data-post>Post your ad</button></nav>
+</div></header>
+<main id="top">
+<div class="hero">
+<div class="hl">
+<span class="up">Pallet trucks across the UK</span>
+<h1 class="serif">Buy, sell and hire with confidence.</h1>
+<p>Every truck is listed by condition, so you always know what you are getting.</p>
+<div class="btns"><a class="b" href="#shop">Browse trucks</a><button class="b o" type="button" data-post>Post your ad</button></div>
+</div>
+<div class="hr"><svg viewBox="0 0 220 130" aria-hidden="true"><use href="#pt"/></svg></div>
+</div>
+
+<section id="shop"><div class="wrap">
+<div class="sh"><h2 class="serif">Shop by condition</h2><span class="up" id="count"></span></div>
+<div class="tabs serif" id="tabs" role="group" aria-label="Condition"></div>
+<p class="note" id="note"></p>
+<div class="chips" id="chips" role="group" aria-label="Truck type"></div>
+<div class="grid" id="grid"></div>
+</div></section>
+
+<div class="sell">
+<h2 class="serif">Got a truck to sell or hire out?</h2>
+<p>Post your ad with photos and a price. We check every ad before it goes live.</p>
+<button class="b" type="button" data-post>Post your ad</button>
+</div>
+</main>
+<footer><div class="wrap">© 2026 [COMPANY NAME] · Pallet Truck Market · Prices exclude VAT · Preview version</div></footer>
+
+<dialog id="pd">
+<h2 class="serif">Post your ad</h2>
+<p class="hint">Preview only: ads here are not saved or sent. On the live site your ad goes to the owner for approval before it appears.</p>
+<form id="pf">
+<label for="fc">Section</label>
+<select id="fc"><option value="new">New</option><option value="used">Used</option><option value="repaired">Mechanically repaired</option><option value="faulty">Faulty</option><option value="hire">For hire (per week)</option></select>
+<label for="ft">Truck type</label><select id="ft"></select>
+<label for="fn">Title</label><input id="fn" required maxlength="80" placeholder="e.g. Electric pallet truck, 1500 kg">
+<label for="fp">Price in £, excluding VAT</label><input id="fp" type="number" min="0" step="1" required>
+<label for="fy">Town or city</label><input id="fy" required maxlength="40">
+<label for="fd">Details</label><textarea id="fd" rows="2" maxlength="200"></textarea>
+<div id="gr" hidden><label for="fr">What was repaired, and when?</label><input id="fr" maxlength="150"></div>
+<div id="gf" hidden><label for="ff">What is the fault?</label><input id="ff" maxlength="150"><p class="hint">Faulty trucks are shown as “sold as seen”.</p></div>
+<label for="fi">Photos (up to 5)</label><input id="fi" type="file" accept="image/*" multiple>
+<div id="th"></div>
+<div class="row"><button class="b" type="submit">Publish ad</button><button class="b o" type="button" id="px">Cancel</button></div>
+</form>
+</dialog>
+<p id="toast" class="wrap hint" role="status"></p>
+
+<script>
+const EMAIL='hello@yourdomain.co.uk';
+const SEC={all:['All','Every truck on the site.'],new:['New','Brand-new trucks, never used.'],used:['Used','Second-hand trucks in working order.'],repaired:['Mechanically repaired','Trucks that had a fault and have been fixed. Sellers say what was repaired.'],faulty:['Faulty','Trucks that need work, sold as seen for spares or repair. Sellers describe the fault.'],hire:['Hire','Trucks to hire by the week.']};
+const CATS={all:'All types',manual:'Manual',electric:'Electric',stacker:'Stackers',highlift:'High-lift',weighing:'Weighing',lowprofile:'Low-profile',allterrain:'All-terrain'};
+const S=[
+['new','manual','Hydraulic hand pallet truck','2500 kg · Manchester',170,''],
+['new','manual','Quiet-wheel hand pallet truck','2500 kg · Birmingham',450,''],
+['new','electric','Electric pallet truck','1500 kg · London',2900,''],
+['new','stacker','Pedestrian stacker','1.6 m lift · Leeds',2100,''],
+['used','manual','Hand pallet truck','2000 kg · Bristol',85,''],
+['used','electric','Electric pallet truck','2000 kg · Glasgow',1600,''],
+['used','stacker','Pedestrian stacker','2.5 m lift · Sheffield',1900,''],
+['used','weighing','Weighing pallet truck','2000 kg · Liverpool',720,''],
+['repaired','electric','Electric pallet truck','1500 kg · Nottingham',1250,'New drive motor fitted, battery tested, March 2026'],
+['repaired','manual','Hand pallet truck','2500 kg · Cardiff',120,'New hydraulic seals and wheels'],
+['repaired','highlift','Scissor-lift pallet truck','1000 kg · Leeds',480,'Pump rebuilt and tested'],
+['faulty','electric','Electric pallet truck','1500 kg · Staines',250,'Will not charge, battery needs replacing'],
+['faulty','manual','Hand pallet truck','2000 kg · Cardiff',30,'Hydraulics leaking, for spares or repair'],
+['hire','electric','Electric pallet truck, weekly hire','2000 kg · Bristol',45,''],
+['hire','stacker','Pedestrian stacker, weekly hire','2.5 m lift · Sheffield',60,''],
+['hire','manual','Hand pallet truck, weekly hire','2500 kg · Leeds',12,'']
+].map(r=>({c:r[0],t:r[1],n:r[2],d:r[3],p:r[4],x:r[5],im:'',smp:true}));
+let P=S.slice(),tab='all',cat='all',pics=[];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const mail=(s)=>'mailto:'+EMAIL+'?subject='+encodeURIComponent(s);
+$('#tabs').innerHTML=Object.keys(SEC).map(k=>'<button data-t="'+k+'" aria-pressed="false">'+SEC[k][0]+'</button>').join('');
+$('#chips').innerHTML=Object.keys(CATS).map(k=>'<button data-c="'+k+'" aria-pressed="false">'+CATS[k]+'</button>').join('');
+$('#ft').innerHTML=Object.keys(CATS).slice(1).map(k=>'<option value="'+k+'">'+CATS[k]+'</option>').join('');
+function render(){
+ const L=P.filter(a=>(tab==='all'||a.c===tab)&&(cat==='all'||a.t===cat));
+ $('#count').textContent=L.length+(L.length===1?' ad':' ads');
+ $('#note').textContent=SEC[tab][1];
+ $('#grid').innerHTML=L.length?L.map((a,i)=>'<article class="pc"><div class="im c'+(i%4)+'">'+(a.im?'<img src="'+a.im+'" alt="">':'<svg viewBox="0 0 220 130" aria-hidden="true"><use href="#pt"/></svg>')+(a.smp?'<span class="bd">Sample</span>':'')+'</div><span class="tg'+(a.c==='faulty'?' f':'')+'">'+SEC[a.c][0]+(a.c==='faulty'?' · Sold as seen':'')+'</span><h3>'+esc(a.n)+'</h3><p class="sp">'+esc(a.d)+'</p>'+(a.x?'<p class="sp"><b>'+(a.c==='faulty'?'Fault: ':a.c==='repaired'?'Repaired: ':'')+'</b>'+esc(a.x)+'</p>':'')+'<p class="pr">'+(a.p>0?'£'+a.p.toLocaleString('en-GB')+(a.c==='hire'?' per week':'')+' <small>ex VAT</small>':'Price on request')+'</p><a class="en" href="'+mail('Enquiry: '+a.n)+'">Enquire →</a></article>').join(''):'<p class="none">Nothing here yet. Try another section or type.</p>';
+ document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.t===tab)));
+ document.querySelectorAll('#chips button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.c===cat)));
+}
+$('#tabs').onclick=e=>{const b=e.target.closest('button');if(b){tab=b.dataset.t;render()}};
+$('#chips').onclick=e=>{const b=e.target.closest('button');if(b){cat=b.dataset.c;render()}};
+document.querySelectorAll('[data-t]:not(button)').forEach(a=>a.addEventListener('click',()=>{tab=a.dataset.t;render()}));
+document.querySelectorAll('[data-post]').forEach(b=>b.onclick=()=>{$('#pd').showModal()});
+$('#px').onclick=()=>$('#pd').close();
+function sync(){const v=$('#fc').value;$('#gr').hidden=v!=='repaired';$('#gf').hidden=v!=='faulty';$('#ff').required=v==='faulty';$('#fr').required=v==='repaired'}
+$('#fc').onchange=sync;sync();
+function shrink(f){return new Promise(res=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,900/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.8))};im.onerror=()=>res(null);im.src=r.result};r.onerror=()=>res(null);r.readAsDataURL(f)})}
+$('#fi').onchange=async e=>{const fs=[...e.target.files].slice(0,5);pics=(await Promise.all(fs.map(shrink))).filter(Boolean);$('#th').innerHTML=pics.map(s=>'<img src="'+s+'" alt="Photo preview">').join('')};
+$('#pf').onsubmit=e=>{
+ e.preventDefault();
+ const c=$('#fc').value;
+ P.unshift({c:c,t:$('#ft').value,n:$('#fn').value.trim(),d:($('#fd').value.trim().slice(0,120)+' · '+$('#fy').value.trim()).replace(/^ · /,''),p:Math.max(0,Number($('#fp').value)||0),x:(c==='repaired'?$('#fr').value:c==='faulty'?$('#ff').value:'').trim(),im:pics[0]||'',smp:false});
+ $('#pf').reset();pics=[];$('#th').innerHTML='';sync();$('#pd').close();tab=c;cat='all';render();
+ $('#toast').textContent='Your ad is showing in this preview only. It is not saved.';
+ $('#shop').scrollIntoView({behavior:'smooth'});
+};
+render();
+</script>
+</body>
+</html>
