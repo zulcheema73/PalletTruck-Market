@@ -183,5 +183,245 @@ $('#pf').onsubmit=e=>{
 };
 render();
 </script>
+ <!-- PALLET TRUCK MARKET SELLER ACCOUNTS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+  const SUPABASE_URL = 'https://egueqadnanhzffnfdyyu.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_4Rx60cjGow7bKJ4SpWCrdA_7ma2SMhe';
+
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  const nav = document.querySelector('header nav.r');
+
+  if (!nav || document.getElementById('seller-account')) {
+    console.error('Seller account setup could not find the website navigation.');
+    return;
+  }
+
+  const accountButton = document.createElement('button');
+  accountButton.id = 'seller-account';
+  accountButton.type = 'button';
+  accountButton.className = 'b o';
+  accountButton.textContent = 'Seller account';
+  nav.prepend(accountButton);
+
+  const dialog = document.createElement('dialog');
+  dialog.id = 'seller-dialog';
+  dialog.innerHTML = `
+    <h2 class="serif" id="seller-title">Create seller account</h2>
+    <p class="hint" id="seller-intro">
+      Join Pallet Truck Market as a seller.
+    </p>
+
+    <form id="seller-form">
+      <div id="seller-details">
+        <label for="seller-business">Business name</label>
+        <input id="seller-business" required maxlength="100"
+          placeholder="Your business name">
+
+        <label for="seller-phone">Business phone</label>
+        <input id="seller-phone" type="tel" required
+          placeholder="Your phone number">
+
+        <label for="seller-location">Town or city</label>
+        <input id="seller-location" required
+          placeholder="Your business location">
+      </div>
+
+      <label for="seller-email">Email address</label>
+      <input id="seller-email" type="email" required
+        autocomplete="email">
+
+      <label for="seller-password">Password</label>
+      <input id="seller-password" type="password"
+        minlength="8" required autocomplete="new-password">
+
+      <div class="row">
+        <button class="b" id="seller-submit" type="submit">
+          Create account
+        </button>
+        <button class="b o" id="seller-close" type="button">
+          Close
+        </button>
+      </div>
+    </form>
+
+    <button class="seller-switch" id="seller-switch" type="button">
+      Already registered? Log in
+    </button>
+
+    <p class="hint" id="seller-message" role="status"></p>
+  `;
+
+  document.body.appendChild(dialog);
+
+  const get = id => document.getElementById(id);
+  let mode = 'signup';
+
+  const style = document.createElement('style');
+  style.textContent = `
+    #seller-dialog {
+      max-width:560px;width:calc(100% - 24px);
+      max-height:92vh;overflow:auto;
+      background:var(--bg);color:var(--ink);
+      border:1px solid var(--line);padding:22px;
+    }
+    #seller-dialog::backdrop {background:rgba(0,0,0,.6)}
+    #seller-dialog label {
+      display:block;font-size:14px;font-weight:600;margin-top:12px;
+    }
+    #seller-dialog input {
+      width:100%;padding:10px;margin-top:5px;
+      border:1px solid var(--line);
+      background:var(--bg);color:var(--ink);
+    }
+    #seller-dialog .seller-switch {
+      margin-top:14px;background:none;border:0;
+      text-decoration:underline;cursor:pointer;color:var(--ink);
+    }
+  `;
+  document.head.appendChild(style);
+
+  function showMessage(text) {
+    get('seller-message').textContent = text;
+  }
+
+  function setMode(value) {
+    mode = value;
+    get('seller-title').textContent =
+      mode === 'signup' ? 'Create seller account' : 'Seller login';
+
+    get('seller-intro').textContent =
+      mode === 'signup'
+        ? 'Register your business with us.'
+        : 'Welcome back to Pallet Truck Market.';
+
+    get('seller-details').hidden = mode === 'login';
+
+    ['seller-business','seller-phone','seller-location'].forEach(id => {
+      get(id).required = mode === 'signup';
+    });
+
+    get('seller-submit').textContent =
+      mode === 'signup' ? 'Create account' : 'Log in';
+
+    get('seller-switch').textContent =
+      mode === 'signup'
+        ? 'Already registered? Log in'
+        : 'New seller? Create an account';
+
+    showMessage('');
+  }
+
+  async function refreshAccountButton() {
+    const {data, error} = await db.auth.getSession();
+    accountButton.textContent =
+      !error && data.session ? 'My account' : 'Seller account';
+  }
+
+  accountButton.addEventListener('click', async () => {
+    const {data, error} = await db.auth.getSession();
+
+    if (error) {
+      showMessage(error.message);
+      return;
+    }
+
+    if (data.session) {
+      const confirmed = window.confirm(
+        'You are logged in as ' + data.session.user.email +
+        '. Would you like to log out?'
+      );
+
+      if (confirmed) {
+        const {error: logoutError} = await db.auth.signOut();
+        if (logoutError) {
+          window.alert(logoutError.message);
+        } else {
+          await refreshAccountButton();
+          window.alert('You have logged out.');
+        }
+      }
+      return;
+    }
+
+    get('seller-form').hidden = false;
+    get('seller-switch').hidden = false;
+    setMode('signup');
+    dialog.showModal();
+  });
+
+  get('seller-close').addEventListener('click', () => dialog.close());
+
+  get('seller-switch').addEventListener('click', () => {
+    setMode(mode === 'signup' ? 'login' : 'signup');
+  });
+
+  get('seller-form').addEventListener('submit', async event => {
+    event.preventDefault();
+
+    const submit = get('seller-submit');
+    submit.disabled = true;
+    showMessage('Please wait...');
+
+    const email = get('seller-email').value.trim();
+    const password = get('seller-password').value;
+
+    try {
+      let result;
+
+      if (mode === 'signup') {
+        result = await db.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              business_name: get('seller-business').value.trim(),
+              phone: get('seller-phone').value.trim(),
+              location: get('seller-location').value.trim()
+            },
+            emailRedirectTo: 'https://pallettruckmarket.co.uk'
+          }
+        });
+      } else {
+        result = await db.auth.signInWithPassword({
+          email,
+          password
+        });
+      }
+
+      if (result.error) {
+        showMessage(result.error.message);
+        return;
+      }
+
+      if (mode === 'signup' && !result.data.session) {
+        showMessage(
+          'Registration received! Please check your email and confirm your address before logging in.'
+        );
+        return;
+      }
+
+      showMessage('Welcome! You are logged in.');
+      await refreshAccountButton();
+
+      if (mode === 'login') {
+        dialog.close();
+      }
+    } catch (error) {
+      showMessage('Something went wrong. Please try again.');
+      console.error(error);
+    } finally {
+      submit.disabled = false;
+    }
+  });
+
+  db.auth.onAuthStateChange(() => {
+    refreshAccountButton();
+  });
+
+  refreshAccountButton();
+})();
+</script>
 </body>
 </html>
