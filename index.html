@@ -422,6 +422,59 @@ render();
 
   refreshAccountButton();
 })();
+ async function openSellerDashboard() {
+  const { data, error } = await db.auth.getSession();
+
+  if (error || !data.session) {
+    alert('Please log in first.');
+    return;
+  }
+
+  const sellerId = data.session.user.id;
+
+  const { data: listings, error: listingError } = await db
+    .from('listings')
+    .select('*')
+    .eq('seller_id', sellerId)
+    .order('created_at', { ascending: false });
+
+  if (listingError) {
+    alert('Could not load your listings: ' + listingError.message);
+    return;
+  }
+
+  let dashboard = document.getElementById('seller-dashboard');
+
+  if (!dashboard) {
+    dashboard = document.createElement('dialog');
+    dashboard.id = 'seller-dashboard';
+    document.body.appendChild(dashboard);
+  }
+
+  dashboard.innerHTML = `
+    <h2>My seller dashboard</h2>
+    <p>Welcome to your Pallet Truck Market account.</p>
+    <h3>My listings</h3>
+    <div id="my-listings"></div>
+    <button id="dashboard-close" type="button">Close</button>
+  `;
+
+  const container = dashboard.querySelector('#my-listings');
+
+  if (!listings.length) {
+    container.innerHTML = '<p>You have not posted any listings yet.</p>';
+  } else {
+    container.innerHTML = listings.map(item => `
+      <div style="padding:12px 0;border-bottom:1px solid var(--line)">
+        <strong>${String(item.title || 'Untitled listing')}</strong>
+        <p>Status: ${String(item.status || 'Pending')}</p>
+      </div>
+    `).join('');
+  }
+
+  dashboard.querySelector('#dashboard-close').onclick = () => dashboard.close();
+  dashboard.showModal();
+}
 </script>
 </body>
 </html>
